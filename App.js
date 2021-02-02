@@ -8,21 +8,17 @@
 
 import React from 'react';
 import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
+  StyleSheet,SafeAreaView,View,Text,
 } from 'react-native';
-import Home from './src/screens/Home'
+import Home from "./src/screens/Home";
 
 
 export default function App(){
   return(
-    <View style={{flex:1}}>
+    <SafeAreaView>
+    <View style = {{flex:1}}>
       <Home/>
     </View>
-  )
+    </SafeAreaView>
+  );
 }
-
-
