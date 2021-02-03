@@ -16,11 +16,11 @@ import Search from "./src/screens/Search";
 
 export default function App() {
   return (
-    <SafeAreaView>
-      <View style={{ flex: 1 }}>
-        {/* <Home/> */}
-        <Search />
-      </View>
+    <SafeAreaView style={{ flex: 1 }}>
+
+      {/* <Home/> */}
+      <Search />
+
     </SafeAreaView>
   );
 }
