@@ -165,6 +165,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				DC6D0B3E344D044DDF1C96CA /* Pods */,
+				BCEF096BE0924C87AE6C3D0F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -182,6 +183,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BCEF096BE0924C87AE6C3D0F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		DC6D0B3E344D044DDF1C96CA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +202,6 @@
 				26633406C3FF92CF9541F446 /* Pods-Clone_Youtube-tvOSTests.debug.xcconfig */,
 				74DF30BE880AD9C36F71D25E /* Pods-Clone_Youtube-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

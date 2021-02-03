@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, Image, TouchableOpacity, SafeAreaView, FlatList, ActivityIndicator } from 'react-native';
 import MiniCard from '../components/MiniCard'
+import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 const SearchScreen = () => {
     const [value, setValue] = useState("")
-    const [miniCardData, setMiniCard] = useState([])
+    // const [miniCardData, setMiniCard] = useState([])
+    const dispatch = useDispatch()
+    const miniCardData = useSelector(state => {
+        return state
+    })
     const [loading, setLoading] = useState(false)
+    const navigation = useNavigation();
 
     const fetchData = () => {
         setLoading(true)
@@ -15,8 +22,8 @@ const SearchScreen = () => {
             .then(res => res.json())
             .then(data => {
                 setLoading(false)
-                setMiniCard(data.items)
-
+                dispatch({ type: "add", payload: data.items })
+                // setMiniCard(data.items)
             })
     }
     return (
@@ -32,8 +39,10 @@ const SearchScreen = () => {
                         justifyContent: "space-around",
 
                     }}>
-                        <Image source={{ uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAAAwMDD4+Ph3d3fa2tp7e3uAgIBzc3Pc3NxsbGxvb290dHQNDQ14eHju7u4TExMcHBxMTExRUVH19fU7OzsmJiaLi4vn5+dFRUVWVlZfX1+hoaE5OTni4uLS0tK8lAocAAADBUlEQVR4nO2d63ISQRBGmQQRARUSQaOJvv9bCrWmEtnt/tVD75z5zhP0qb5uKjUsFkIIIYQQQgghhBBCCCGEEEIIIYQQWJ6zA6jNsmyyQ6jLrpTyKzuImmzKhYfsMOqxKwOP99mRVGJZXnlgKq7LG0ei4ra85+5bdjzhLMv/vHzNjiiYa8FzFlmK25FgKfsf2VEFsp4QPCv+zo4rjHGJ/lP8lB1ZEDtD8KzIWBobU/Dzh+zYQrBK9AxekNGF01MUJDi1B3vpQUYG8UPGWROMDNqLXj3YBnYG+T3IEMRPUbygfclAhox9i/J7kJHBnteEMtgE+B50vugZGez5i16CTaBTrXXwawK/6HWqtQ6+B3WqtQ6+RPGnWsdrQj3YBvhFj+9B/BTFC+qLvnXwawLfg/g1gV/0+B7s+N8p938W9zemhqBToofj3W05fb+tYAIf4wWdUy2DeENnyKQQbjivEi3xhs6iTyLY0D7V0og1nF8Ggw1n14MXIg2fs2UmCc3hKttmitg+nKNi8Cyd27ov8fvwS7bQiPCbZnaFGn+Xzm1lVPi2mNnar2A4s0KtYeiNG8Y3vrc0IH+n6eCPiW4vUhTtXsS8c+H0IuW1EqdQpdgM9kQ9UBTtA+5AeRzJKVS+IiaL9tI4URSd1U9RtAt1T3luzs7iiaLo9CJF0ZmofEVMFu3rBvO6pX2jYhSdQqW8NGsrYh7TtZfGC0XRXv2YLDqFynij1JuoR0oW7V7EPE/eQaHaipgs2oX6RFF0xg1F0SnU7NCisFc/plDtXsT8+IpdqE/ZoUXRgaI9UR+zQ4vC/sMGRtEu1A7Gzc/s0KKwlwZG0V79GMUOCtXOIubX8+xexCjahSrFdrCvG8yPddo3KkbRLtQOFLfZoUVhL411dmhR2L2I+fljq1CX2YHFMZ1FTJFemOpFzKAZGBcqqEQHrhVxgtcHHKxEB96PG9SQeWNFLtGB16/+XXYg9RiWBubknmJFLtGBFV1wscAc20IIIYQQQgghhBBCCCGEEEIIIYQQY/4CTaQpIdOM7sQAAAAASUVORK5CYII=' }}
-                            style={{ width: 40, height: 28, marginLeft: 10 }} />
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                            <Image source={{ uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAAAwMDD4+Ph3d3fa2tp7e3uAgIBzc3Pc3NxsbGxvb290dHQNDQ14eHju7u4TExMcHBxMTExRUVH19fU7OzsmJiaLi4vn5+dFRUVWVlZfX1+hoaE5OTni4uLS0tK8lAocAAADBUlEQVR4nO2d63ISQRBGmQQRARUSQaOJvv9bCrWmEtnt/tVD75z5zhP0qb5uKjUsFkIIIYQQQgghhBBCCCGEEEIIIYQQWJ6zA6jNsmyyQ6jLrpTyKzuImmzKhYfsMOqxKwOP99mRVGJZXnlgKq7LG0ei4ra85+5bdjzhLMv/vHzNjiiYa8FzFlmK25FgKfsf2VEFsp4QPCv+zo4rjHGJ/lP8lB1ZEDtD8KzIWBobU/Dzh+zYQrBK9AxekNGF01MUJDi1B3vpQUYG8UPGWROMDNqLXj3YBnYG+T3IEMRPUbygfclAhox9i/J7kJHBnteEMtgE+B50vugZGez5i16CTaBTrXXwawK/6HWqtQ6+B3WqtQ6+RPGnWsdrQj3YBvhFj+9B/BTFC+qLvnXwawLfg/g1gV/0+B7s+N8p938W9zemhqBToofj3W05fb+tYAIf4wWdUy2DeENnyKQQbjivEi3xhs6iTyLY0D7V0og1nF8Ggw1n14MXIg2fs2UmCc3hKttmitg+nKNi8Cyd27ov8fvwS7bQiPCbZnaFGn+Xzm1lVPi2mNnar2A4s0KtYeiNG8Y3vrc0IH+n6eCPiW4vUhTtXsS8c+H0IuW1EqdQpdgM9kQ9UBTtA+5AeRzJKVS+IiaL9tI4URSd1U9RtAt1T3luzs7iiaLo9CJF0ZmofEVMFu3rBvO6pX2jYhSdQqW8NGsrYh7TtZfGC0XRXv2YLDqFynij1JuoR0oW7V7EPE/eQaHaipgs2oX6RFF0xg1F0SnU7NCisFc/plDtXsT8+IpdqE/ZoUXRgaI9UR+zQ4vC/sMGRtEu1A7Gzc/s0KKwlwZG0V79GMUOCtXOIubX8+xexCjahSrFdrCvG8yPddo3KkbRLtQOFLfZoUVhL411dmhR2L2I+fljq1CX2YHFMZ1FTJFemOpFzKAZGBcqqEQHrhVxgtcHHKxEB96PG9SQeWNFLtGB16/+XXYg9RiWBubknmJFLtGBFV1wscAc20IIIYQQQgghhBBCCCGEEEIIIYQQY/4CTaQpIdOM7sQAAAAASUVORK5CYII=' }}
+                                style={{ width: 40, height: 28, marginLeft: 10 }} />
+                        </TouchableOpacity>
 
                         <TextInput
                             style={{
