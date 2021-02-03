@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 
-const MiniCard = () => {
+const MiniCard = (props) => {
     return (
+        <>
+            <View style={{
+                flexDirection: "row", marginTop: 10,
+                justifyContent: 'space-evenly',
+                width: "100%", height: 120,
+            }}>
+                <Image
 
-        <View style={{ flexDirection: "row" }}>
-            <Image
-                source={{ uri: 'https://images.unsplash.com/photo-1436397543931-01c4a5162bdb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OHx8YmFja2dyb3VuZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' }}
-                style={{ width: "50%", height: 120 }}
-            />
+                    source={{ uri: `https://i.ytimg.com/vi/${props.videoId}/maxresdefault.jpg` }}
+                    style={{ width: "50%", height: 120 }}
+                />
 
-            <View style={{ paddingLeft: 7 }}>
-                <Text style={{
-                    fontSize: 17,
-                    width: Dimensions.get("screen").width / 2
-                }}
-                    ellipsizeMode="tail"
-                    numberOfLines={3} >
-                    This is an amazing project</Text>
+                <View style={{ paddingLeft: 7 }}>
+                    <Text style={{
+                        fontSize: 17,
+                        width: Dimensions.get("screen").width / 2
+                    }}
+                        ellipsizeMode="tail"
+                        numberOfLines={3} >
+                        {props.title}</Text>
 
-                <Text styles={{ fontSize: 12, color: "red" }}
-                >Coders never quit</Text>
+                    <Text styles={{ fontSize: 12, color: "red" }}
+                    >{props.channel}</Text>
 
+                </View>
             </View>
-        </View>
+        </>
 
     );
 }
