@@ -49,6 +49,10 @@ const styles = StyleSheet.create(
             backgroundColor: "white",
             flexDirection: "row",
             justifyContent: 'space-between',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
             //elevation:5                                       (Android only)
             shadowOffset: { width: 5, height: 5, },
             shadowColor: 'black',

@@ -1,10 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Animated } from 'react-native';
 import { useSelector } from "react-redux";
 import Header from '../components/Header'
 import Card from '../components/Card'
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+
+    const scrollY = new Animated.Value(0)
+    const diffClamp = Animated.diffClamp(scrollY, 0, 45)
+    const translateY = diffClamp.interpolate({
+        inputRange: [0, 40],
+        outputRange: [0, -40]
+    })
 
     const cardData = useSelector(state => {
         return state
@@ -12,7 +19,15 @@ export default function HomeScreen() {
 
     return (
         <View style={{ flex: 1 }}>
-            <Header />
+            <Animated.View
+                style={{
+                    transform: [{ translateY: translateY }],
+                    zIndex: 100,
+                    //elevation:5   
+                }}
+            >
+                <Header />
+            </Animated.View>
             <FlatList
                 data={cardData}
                 renderItem={({ item }) => {
@@ -23,6 +38,9 @@ export default function HomeScreen() {
                     />
                 }}
                 keyExtractor={(item) => item.id.videoId}
+                onScroll={(e) => {
+                    scrollY.setValue(e.nativeEvent.contentOffset.y)
+                }}
             />
         </View>
     );
